@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body { height: 100%; }
+body { margin: 0;padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.row-form-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.nav-space{
+   
+    flex: 1 1 auto;
+}
+.nav-icon{
+    margin-left: 30px;
+}
+.nav-container{
+    height: 100vh;
+}
+.sidebar-panel{
+    background-color:#F2F2F2;
+    
+    width: 270px;
+    color:black;
+    border: 1px soild black;
+    .sidebar-content{
+        margin: 10px;
+    }
+}
+.main-content{
+    margin: 10px;
+}
+
+.menu-link{
+    text-decoration: none;
+    color:black;
+}
+
+.menu-link:hover{
+    text-decoration: none;
+    color:blueviolet;
+}
+
+.action-buttons>button{
+    margin: 20px;
+}
+.action-buttons>a{
+    margin: 20px;
+}
+.electricity-review{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+}
+.object-info{
+    margin-left: 40px;
+    width: 100%;
+}
+table{
+    width: 100%;
+}
+.review_data{
+    width: 100%;
+}

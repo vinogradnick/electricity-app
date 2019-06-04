@@ -1,0 +1,27 @@
+.login-page{
+    display:flex;
+   
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}
+.auth-form{
+    width: 400px;
+
+}
+.auth-card-header{
+    text-align: center;
+}
+.logo-image{
+    width: 128px;
+    align-content: center;
+    margin-left: 35%;
+    
+}
+.auth-field{
+    width: 100%;
+}
+.auth-card-actions{
+    display: flex;
+    justify-content: space-between;
+}

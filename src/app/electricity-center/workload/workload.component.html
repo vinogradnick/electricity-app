@@ -1,0 +1,155 @@
+<mat-card class="workload-card">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Просмотр замера нагрузки</mat-card-title>
+            <mat-card-subtitle>
+                <div class="action-buttons">
+                    <a mat-raised-button [routerLink]="['/electro/workload/create']" class="review-action-btn">Создание
+                        замера нагрузок</a>
+                    <a mat-raised-button [routerLink]="['/electro/workload/report']" class="review-action-btn">Отчет по
+                        замеру нагрузок</a>
+
+
+                </div>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <p>
+            <mat-form-field appearance="outline" class="review_data">
+                <mat-label>Форма поиска по таблице</mat-label>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Поиск по таблице">
+                <mat-icon matSuffix>find_replace</mat-icon>
+            </mat-form-field>
+        </p>
+
+        <mat-card-content class="electricity-review">
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort class="mat-elevation-z8">
+                <ng-container matColumnDef="Id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Идентификатор </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="Name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Наименование </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="Date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата проведения замера </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="TpName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Наименование ТП </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Tp.Name}}-{{element.Tp.Id}} </td>
+                </ng-container>
+
+                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                <ng-container matColumnDef="expandedDetail">
+                    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                        <div class="example-element-detail"
+                            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                            <div class="example-element-diagram">
+                                
+                                <mat-accordion>
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Секции шин
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                Данные по секциям шин
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <table mat-table [dataSource]="element.BusbarSections" class="mat-elevation-z8">
+
+                                                <!--- Note that these columns can be defined in any order.
+                                                            The actual rendered columns are set as a property on the row definition" -->
+                                        
+                                                <!-- Position Column -->
+                                                <ng-container matColumnDef="Id">
+                                                  <th mat-header-cell *matHeaderCellDef> Идентификатор </th>
+                                                  <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+                                                </ng-container>
+                                        
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="Name">
+                                                  <th mat-header-cell *matHeaderCellDef> Наименование </th>
+                                                  <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+                                                </ng-container>
+                                        
+                                                <!-- Weight Column -->
+                                                <ng-container matColumnDef="Value">
+                                                  <th mat-header-cell *matHeaderCellDef> Значение </th>
+                                                  <td mat-cell *matCellDef="let element"> {{element.Value}} </td>
+                                                </ng-container>
+                                        
+                                               
+                                        
+                                                <tr mat-header-row *matHeaderRowDef="busbarSectionsDisplay"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: busbarSectionsDisplay;"></tr>
+                                              </table>
+                                    </mat-expansion-panel>
+                                    <mat-expansion-panel>
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    Фазы 
+                                                </mat-panel-title>
+                                                <mat-panel-description>
+                                                    Данные по фазам
+                                                </mat-panel-description>
+                                            </mat-expansion-panel-header>
+                                            
+                                                  <table mat-table [dataSource]="element.Phases" class="mat-elevation-z8">
+
+                                                        <!--- Note that these columns can be defined in any order.
+                                                                    The actual rendered columns are set as a property on the row definition" -->
+                                                
+                                                        <!-- Position Column -->
+                                                        <ng-container matColumnDef="Id">
+                                                          <th mat-header-cell *matHeaderCellDef> Идентификатор </th>
+                                                          <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+                                                        </ng-container>
+                                                
+                                                        <!-- Name Column -->
+                                                        <ng-container matColumnDef="LineName">
+                                                          <th mat-header-cell *matHeaderCellDef> Наименование линии </th>
+                                                          <td mat-cell *matCellDef="let element"> {{element.LineName}} </td>
+                                                        </ng-container>
+                                                
+                                                        <!-- Weight Column -->
+                                                        <ng-container matColumnDef="Values">
+                                                          <th mat-header-cell *matHeaderCellDef> Значения </th>
+                                                          <td mat-cell *matCellDef="let element"> {{element.Values}} </td>
+                                                        </ng-container>
+                                                
+                                                       
+                                                
+                                                        <tr mat-header-row *matHeaderRowDef="phaseDisplay"></tr>
+                                                        <tr mat-row *matRowDef="let row; columns: phaseDisplay;"></tr>
+                                                      </table>
+                                        </mat-expansion-panel>
+
+                                </mat-accordion>
+                            </div>
+
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+                    [class.example-expanded-row]="expandedElement === element"
+                    (click)="expandedElement = expandedElement === element ? null : element">
+                </tr>
+                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            </table>
+
+
+        </mat-card-content>
+
+    </mat-card>
+
+</mat-card>

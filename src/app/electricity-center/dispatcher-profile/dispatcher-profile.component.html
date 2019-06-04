@@ -1,0 +1,50 @@
+<mat-card class="express-page">
+  <mat-card class=" element element-table">
+    <h2>Список заявок</h2>
+      <table mat-table [dataSource]="dataSource" class="table-full">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Идентификатор заявки </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Наименование заявки </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef> Сообщение </th>
+            <td mat-cell *matCellDef="let element"> {{element.message}} </td>
+          </ng-container>
+        
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Тип заявки </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr class="order-hover" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectOrder(row)"></tr>
+        </table>
+        
+        
+  </mat-card>
+  <mat-card class="element">
+    <h4>Быстрые действия</h4>
+    <mat-list role="list">
+      <mat-list-item role="listitem"> <a routerLink="/electro/orders/create" mat-raised-button color="primary">Создать заявку</a>
+      </mat-list-item>
+      <mat-list-item role="listitem"> <a mat-raised-button color="primary" routerLink="/electro/workload/create">Записать Замеры Нагрузок</a>
+      </mat-list-item>
+      <mat-list-item role="listitem"> <a mat-raised-button color="primary">Формирование отчета</a>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+</mat-card>

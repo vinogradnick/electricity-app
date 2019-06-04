@@ -1,0 +1,49 @@
+<mat-toolbar color="primary" role="heading">
+
+
+  <mat-toolbar-row>
+    
+    <span>Electro </span>
+
+    <span class="nav-space"></span>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-drawer-container autosize class="nav-container">
+
+  <mat-drawer-content>
+    <div class="main-content">
+
+      <div class="login-page">
+        <mat-card class="auth-form">
+          <mat-card-header>
+            <mat-card-title class="auth-card-header">Вход в приложение</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="assets/img/electric-tower.svg" class="logo-image">
+
+          <mat-card-content class="auth-card-content">
+
+            <mat-form-field appearance="outline" class="auth-field">
+              <mat-label>Логин</mat-label>
+              <input matInput placeholder="Логин" [(ngModel)]="user.name" type="text">
+              <mat-icon matSuffix>label</mat-icon>
+              <mat-hint>Логин для входа</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="auth-field">
+              <mat-label>Пароль</mat-label>
+              <input matInput placeholder="Пароль" [(ngModel)]="user.password" type="password">
+              <mat-icon matSuffix>security</mat-icon>
+              <mat-hint>Пароль для входа</mat-hint>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions class="auth-card-actions">
+            <button mat-raised-button color="primary" (click)="onSubmit()">Войти в приложение</button>
+            <button mat-raised-button color="accent">Отменить вход</button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

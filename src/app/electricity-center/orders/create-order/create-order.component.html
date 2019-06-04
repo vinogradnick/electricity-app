@@ -1,0 +1,62 @@
+<mat-card class="electro-orders">
+    <h2 class="electro-orders-text">Создание заявки</h2>
+    <mat-list>
+      <h3 mat-subheader>Данные заявки</h3>
+      <mat-list-item >
+        <mat-icon mat-list-icon>label</mat-icon>
+        <h4 mat-line>Наименование заявки</h4>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Наименование заявки" [(value)]="order.name">
+          </mat-form-field>
+        
+      </mat-list-item>
+      <mat-list-item >
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Сообщение  заявки</h4>
+          <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Сообщение заявки" [(value)]="order.message"></textarea>
+            </mat-form-field>
+        </mat-list-item>
+        <mat-list-item >
+            <mat-icon mat-list-icon>label</mat-icon>
+            <h4 mat-line>Тип  заявки</h4>
+            <mat-form-field>
+                <mat-label>Тип заявки</mat-label>
+                <mat-select [(value)]="order.type">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Информация по объекту заявки</h3>
+      <mat-list-item >
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Номер объекта  </h4>
+          <mat-form-field class="example-full-width">
+              <input matInput placeholder="Идентификатор объекта" [(value)]="order.electroObject.id">
+            </mat-form-field>
+        </mat-list-item>
+        <mat-list-item >
+            <mat-icon mat-list-icon>label</mat-icon>
+            <h4 mat-line> Тип объекта  </h4>
+            <mat-form-field>
+                <mat-label>Select an option</mat-label>
+                <mat-select [(value)]="order.electroObject.type">
+                  <mat-option>None</mat-option>
+                  <mat-option value="option1">Option 1</mat-option>
+                  <mat-option value="option2">Option 2</mat-option>
+                  <mat-option value="option3">Option 3</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </mat-list-item>
+          <div class="row-form-buttons">
+              <button mat-raised-button (click)="onSubmit()">Создать заявку</button>
+              <button mat-raised-button color="accent">Отменить</button>
+      
+            </div>
+    </mat-list>
+  </mat-card>
+  

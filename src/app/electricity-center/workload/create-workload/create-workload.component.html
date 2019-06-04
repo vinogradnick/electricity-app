@@ -1,0 +1,204 @@
+<mat-card>
+
+  <h4>Создание замера нагрузок</h4>
+  <mat-grid-list cols="4" rowHeight="80px">
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Наименование ТП" aria-label="Number" matInput [(ngModel)]="workload.TpName"
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Дата проведения замера" [(ngModel)]="workload.Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
+   
+    
+  </mat-grid-list>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Секции шин">
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Добавление секции шин
+                </mat-panel-title>
+                <mat-panel-description>
+                  Данные по секции шин
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                <input matInput placeholder="Наименование секции шин" type="text" [(ngModel)]="busbarName">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Значение секции шин"  type="number" [(ngModel)]="busbarValue">
+              </mat-form-field>
+              <button mat-raised-button (click)="add(busbarName,busbarValue)">Добавить секцию шин</button>
+            </mat-expansion-panel>
+            
+          </mat-accordion>
+      <table mat-table [dataSource]="busbarSections" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="Id">
+          <th mat-header-cell *matHeaderCellDef> Идентификатор </th>
+          <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Наименование </th>
+          <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Value">
+          <th mat-header-cell *matHeaderCellDef> Значение </th>
+          <td mat-cell *matCellDef="let element"> {{element.Value}} </td>
+        </ng-container>
+
+       
+
+        <tr mat-header-row *matHeaderRowDef="busbarSectionsDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: busbarSectionsDisplay;"></tr>
+      </table>
+    </mat-tab>
+    <mat-tab label="Секция-1">
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Добавление Фазы
+                </mat-panel-title>
+                <mat-panel-description>
+                  Данные по фазе
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Наименование линии" aria-label="Number" matInput [(ngModel)]="lineName1" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of options" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Значение по фазе A "  type="number" [(ngModel)]="phaseA1">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Значение по фазе B "  type="number" [(ngModel)]="phaseB1">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input matInput placeholder="Значение по фазе C "  type="number" [(ngModel)]="phaseC1">
+                  </mat-form-field>
+              <button mat-raised-button (click)="addPhase1(lineName1,phaseA1,phaseB1,phaseC1)">Добавить фазу</button>
+            </mat-expansion-panel>
+            
+          </mat-accordion>
+      <table mat-table [dataSource]="phase1DataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="Id">
+          <th mat-header-cell *matHeaderCellDef> Идентификатор </th>
+          <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="LineName">
+          <th mat-header-cell *matHeaderCellDef> Наименование линии </th>
+          <td mat-cell *matCellDef="let element"> {{element.LineName}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Values">
+          <th mat-header-cell *matHeaderCellDef> Значения </th>
+          <td mat-cell *matCellDef="let element"> {{element.Values}} </td>
+        </ng-container>
+
+       
+
+        <tr mat-header-row *matHeaderRowDef="phaseDisplay"></tr>
+        <tr mat-row *matRowDef="let row; columns: phaseDisplay;"></tr>
+      </table>
+    </mat-tab>
+    <mat-tab label="Секция-2">
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Добавление Фазы
+                </mat-panel-title>
+                <mat-panel-description>
+                  Данные по фазе
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Наименование линии" aria-label="Number" matInput [(ngModel)]="lineName2" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of options" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Значение по фазе A "  type="number" [(ngModel)]="phaseA2">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Значение по фазе B "  type="number" [(ngModel)]="phaseB2">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <input matInput placeholder="Значение по фазе C "  type="number" [(ngModel)]="phaseC2">
+                  </mat-form-field>
+              <button mat-raised-button (click)="addPhase2(lineName2,phaseA2,phaseB2,phaseC2)">Добавить фазу</button>
+            </mat-expansion-panel>
+            
+          </mat-accordion>
+          <table mat-table [dataSource]="phase2DataSource" class="mat-elevation-z8">
+
+               <!-- Position Column -->
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef> Идентификатор </th>
+            <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+          </ng-container>
+  
+          <!-- Name Column -->
+          <ng-container matColumnDef="LineName">
+            <th mat-header-cell *matHeaderCellDef> Наименование линии </th>
+            <td mat-cell *matCellDef="let element"> {{element.LineName}} </td>
+          </ng-container>
+  
+          <!-- Weight Column -->
+          <ng-container matColumnDef="Values">
+            <th mat-header-cell *matHeaderCellDef> Значения </th>
+            <td mat-cell *matCellDef="let element"> {{element.Values}} </td>
+          </ng-container>
+               
+        
+                <tr mat-header-row *matHeaderRowDef="phaseDisplay"></tr>
+                <tr mat-row *matRowDef="let row; columns: phaseDisplay;"></tr>
+            </table>
+    </mat-tab>
+  </mat-tab-group>
+  <br>
+  <div class="row-form-buttons">
+      <button mat-raised-button (click)="onSubmit()">Добавить замер нагрузок</button>
+      <button mat-raised-button color="accent">Отменить</button>
+
+    </div>
+</mat-card>

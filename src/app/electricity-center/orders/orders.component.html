@@ -1,0 +1,47 @@
+<mat-card class="electro-orders">
+  <h2 class="electro-orders-text"> Просмотр Заявки № {{order.id}}</h2>
+  <mat-list>
+    <h3 mat-subheader>Данные заявки</h3>
+    <mat-list-item>
+      <mat-icon mat-list-icon>label</mat-icon>
+      <h4 mat-line>Наименование заявки</h4>
+      <h3> {{order.name}} </h3>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon>label</mat-icon>
+      <h4 mat-line>Сообщение заявки</h4>
+      <h3> {{order.message}} </h3>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon>label</mat-icon>
+      <h4 mat-line>Тип заявки</h4>
+      <h3> {{order.type}} </h3>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon mat-list-icon>label</mat-icon>
+      <h4 mat-line>Статус заявки</h4>
+      <h3> {{order.status}} </h3>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon>label</mat-icon>
+      <h4 mat-line>Дата закрытия заявки</h4>
+      <h3> {{order.dataClose}} </h3>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+  <mat-list *ngIf="order.electroObject!=null">
+    <h3 mat-subheader>Информация по объекту заявки</h3>
+    <mat-list-item >
+      <mat-icon mat-list-icon>label</mat-icon>
+      <h4 mat-line>Номер объекта </h4>
+      <h3> {{order.electroObject.id}} </h3>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon>label</mat-icon>
+      <h4 mat-line> Тип объекта </h4>
+      <h3> {{order.electroObject.type}} </h3>
+    </mat-list-item>
+  </mat-list>
+
+</mat-card>

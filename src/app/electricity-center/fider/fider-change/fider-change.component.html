@@ -1,0 +1,63 @@
+<mat-card class="electricity-create">
+  <mat-card-header>
+
+
+    <mat-card-title>Изменение фидера </mat-card-title>
+  </mat-card-header>
+  <form novalidate>
+    <mat-card-content class="create-electro-content">
+      <mat-list>
+        <mat-list-item>
+          <mat-icon mat-list-icon>note</mat-icon>
+          <h4 mat-line>Наименование энергообъекта</h4>
+          <p class="form-element">
+            <mat-form-field appearance="standard">
+              <mat-label>Наименование энергообъекта</mat-label>
+              <input matInput placeholder="Placeholder" [(ngModel)]="fider.Name" name="Name" type="text">
+            </mat-form-field>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label_important</mat-icon>
+          <h4 mat-line>Мощность</h4>
+          <p>
+            <mat-form-field appearance="standard">
+              <mat-label>Мощность</mat-label>
+              <input matInput placeholder="Placeholder" [(ngModel)]="fider.Power" name="Power" type="number">
+            </mat-form-field>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label_important</mat-icon>
+          <h4 mat-line>Напряжение</h4>
+          <p>
+            <mat-form-field appearance="standard">
+              <mat-label>Напряжение</mat-label>
+              <input matInput placeholder="Placeholder" [(ngModel)]="fider.Voltage" name="Voltage" type="number">
+
+            </mat-form-field>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>explore</mat-icon>
+          <h4 mat-line>Геопозиция</h4>
+          <p>
+            <mat-form-field appearance="standard">
+              <mat-label>Геопозиция</mat-label>
+              <input matInput placeholder="Placeholder" [(ngModel)]="fider.Geocode" name="Geocode" type="text">
+
+            </mat-form-field>
+          </p>
+        </mat-list-item>
+
+        <br>
+
+      </mat-list>
+      <div class="row-form-buttons">
+        <button mat-raised-button (click)="onSubmit()">изменить энергообъект</button>
+        <button mat-raised-button color="accent">Отменить</button>
+
+      </div>
+    </mat-card-content>
+  </form>
+</mat-card>

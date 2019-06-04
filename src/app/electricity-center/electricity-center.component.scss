@@ -1,0 +1,33 @@
+.nav-space{
+   
+    flex: 1 1 auto;
+}
+.nav-icon{
+    margin-left: 30px;
+}
+.nav-container{
+    height: 100vh;
+}
+.sidebar-panel{
+    background-color:#F2F2F2;
+    
+    width: 270px;
+    color:black;
+    border: 1px soild black;
+    .sidebar-content{
+        margin: 10px;
+    }
+}
+.main-content{
+    margin: 10px;
+}
+
+.menu-link{
+    text-decoration: none;
+    color:black;
+}
+
+.menu-link:hover{
+    text-decoration: none;
+    color:blueviolet;
+}

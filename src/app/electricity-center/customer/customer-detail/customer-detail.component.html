@@ -1,0 +1,94 @@
+<mat-card class="electricity-create">
+    <mat-card-header>
+  
+  
+      <mat-card-title>Создание потребителя</mat-card-title>
+    </mat-card-header>
+    <form novalidate >
+    <mat-card-content class="create-electro-content">
+      <mat-list>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Идентификатор потребителя</h4>
+         <h3>{{customer.id}}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>note</mat-icon>
+          <h4 mat-line>Наименование потребителя</h4>
+          <h3>{{customer.name}}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label_important</mat-icon>
+          <h4 mat-line>Наименование объекта</h4>
+          <h3>{{customer.objectName}}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label_important</mat-icon>
+          <h4 mat-line>Адрес объекта</h4>
+          <h3>{{customer.objectAddress}}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>explore</mat-icon>
+          <h4 mat-line>Место установки</h4>
+          <h3>{{customer.placeInstall}}</h3>
+        </mat-list-item>
+  
+        <br>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Зависимости</h3>
+        <mat-list-item>
+          <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
+          <h4 mat-line>Номер фидера</h4>
+          <h3>{{customer.fiderNumber}}</h3>
+        </mat-list-item>
+  
+        <br>
+        <mat-list-item>
+          <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
+          <h4 mat-line>Номер ТП</h4>
+          <h3>{{customer.tpNumber}}</h3>
+        </mat-list-item>
+  
+        <br>
+        <mat-list-item>
+          <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
+          <h4 mat-line>Номер Линии</h4>
+          <h3>{{customer.lineNumber}}</h3>
+        </mat-list-item>
+  
+        <br>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Счетчик</h3>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Наименование счетчика</h4>
+         <h3>{{customer.counter.name}}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon="">label_important</mat-icon>
+          <h4 mat-line="">Модель счетчика</h4>
+          <h3>{{customer.counter.brand.name}}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon="">event</mat-icon>
+          <h4 mat-line="">Дата установки</h4>
+          <h3>{{customer.counter.date}}</h3>
+  
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon="">date_range</mat-icon>
+          <h4 mat-line="">Дата последней проверки</h4>
+          <h3>{{customer.counter.dateLastCheck}}</h3>
+
+        </mat-list-item>
+      </mat-list>
+      <div class="row-form-buttons">
+        <button  mat-raised-button  (click)="changeCustomer()">Изменить потребителя</button>
+        <button mat-raised-button color="accent" >Отменить</button>
+  
+      </div>
+  
+    </mat-card-content>
+    </form>
+  
+  </mat-card>

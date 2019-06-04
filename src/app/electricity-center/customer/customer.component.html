@@ -1,0 +1,76 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Просмотр потребителей</mat-card-title>
+    </mat-card-header>
+  
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр по сортированному столбцу">
+    </mat-form-field>
+    <div class="action-buttons">
+      <a class="review-action-btn" mat-raised-button routerLink="/electro/customer/create"> Добавить потребителя </a>
+      <a class="review-action-btn" mat-raised-button (click)="changeCustomer()"> Изменить потребителя </a>
+      <a class="review-action-btn" mat-raised-button routerLink="/electro/customer/delete/1"> Удалить потребителя </a>
+      <button mat-raised-button [matMenuTriggerFor]="menu" class="review-action-btn">Отчеты</button>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item>Отчет по потреблению</a>
+        <a mat-menu-item>Отчет по отключенным потребителям</a>
+      </mat-menu>
+    </div>
+  
+    <div class="mat-elevation-z8">
+  
+  
+      <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+  
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Идентификатор </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Наименование </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="objectName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Наименование объекта </th>
+          <td mat-cell *matCellDef="let element"> {{element.objectName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="objectAddress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Адрес объекта </th>
+          <td mat-cell *matCellDef="let element"> {{element.objectAddress}} </td>
+        </ng-container>
+        <ng-container matColumnDef="placeInstall">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Место установки </th>
+          <td mat-cell *matCellDef="let element"> {{element.placeInstall}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fiderNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Номер фидера </th>
+          <td mat-cell *matCellDef="let element"> {{element.fiderNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lineNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Номер Линии </th>
+          <td mat-cell *matCellDef="let element"> {{element.lineNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="tpNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Номер ТП </th>
+          <td mat-cell *matCellDef="let element"> {{element.tpNumber}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Статус подключения </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay" ></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="customer-select-row"
+         (click)="selectedCustomer(element)"
+        >
+        <!-- add ngModel for customer-->
+        </tr>
+  
+      </table>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </mat-card>

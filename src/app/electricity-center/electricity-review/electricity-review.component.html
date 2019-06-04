@@ -1,0 +1,77 @@
+
+<div class="">
+  
+  <mat-card >
+      <mat-card-header>
+          <mat-card-title>Просмотр энергообъектов</mat-card-title>
+          <mat-card-subtitle>
+              <div class="action-buttons">
+                  <button mat-raised-button [matMenuTriggerFor]="menuData" class="review-action-btn" >Создание энегообъектов</button>
+                  <mat-menu #menuData="matMenu">
+                    <a mat-menu-item [routerLink]="['/electro/fider/create']">Фидер </a>
+                    <a mat-menu-item [routerLink]="['/electro/tp/create']">ТП </a>
+                    <a mat-menu-item [routerLink]="['/electro/section/create']">Секция </a>
+                    <a mat-menu-item [routerLink]="['/electro/line/create']">Линии </a>
+                  </mat-menu>
+           
+                  <button mat-raised-button [matMenuTriggerFor]="menu" class="review-action-btn" >Отчеты</button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Количество точек подключения</button>
+                    <button mat-menu-item>Информация по нагрузка на энергообъекте</button>
+                  </mat-menu>
+                </div>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <p>
+            <mat-form-field appearance="outline" class="review_data">
+              <mat-label>Форма поиска по таблице</mat-label>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Поиск по таблице">
+              <mat-icon matSuffix>find_replace</mat-icon>
+            </mat-form-field>
+          </p>
+       
+     <mat-card-content class="electricity-review">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="Id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Идентификатор </th>
+              <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Наименование </th>
+              <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Тип объекта </th>
+                <td mat-cell *matCellDef="let element"> {{element.Type}} </td>
+              </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Power">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Мощность </th>
+              <td mat-cell *matCellDef="let element"> {{element.Power}} </td>
+            </ng-container>
+            
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Voltage">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Напряжение </th>
+              <td mat-cell *matCellDef="let element"> {{element.Voltage}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Geocode">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Геопозиция </th>
+                <td mat-cell *matCellDef="let element"> {{element.Geocode}} </td>
+              </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectObject(row)"></tr>
+          </table>
+
+         
+     </mat-card-content>
+       
+</mat-card>
+
+</div>
+
