@@ -5,39 +5,57 @@
         <button mat-icon-button (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span>Electro </span>
+        
+    <span>Electro - <span class="low">  Система для отделов электрических сетей</span> </span>
+
 
         <span class="nav-space"></span>
+
+
+
+        <button mat-flat-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">account_box</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Выйти из аккаунта</span>
+          </button>
+        </mat-menu>
+      
 
     </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-drawer-container autosize class="nav-container">
     <mat-drawer #drawer class="sidebar-panel" mode="side">
-        <mat-list role="list">
-                <mat-list-item role="listitem">
-                        <a class="menu-link" routerLink="/electro/main">Главная</a>
-                   </mat-list-item>
-            <mat-list-item role="listitem">
-                 <a class="menu-link" routerLink="/electro/view">Энергообъекты</a>
-            </mat-list-item>
-            <mat-list-item role="listitem">
-                <a class="menu-link" routerLink="/electro/customer/view">Потребители</a>
-            </mat-list-item>
-            <mat-list-item role="listitem">
-                <a class="menu-link" routerLink="/electro/workload/view">Замер нагрузок </a>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item role="listitem">
-                <a class="menu-link" routerLink="constructor">Конструктор запросов</a>
-            </mat-list-item>
+        <mat-nav-list role="list">
+            <a mat-list-item role="listitem" class="lister" routerLink="/electro/main">
+              <mat-icon mat-list-icon>home</mat-icon>
+              <h4 mat-line>Главная</h4>
 
-            <mat-list-item role="listitem">
-                <a class="menu-link" routerLink="statistic">Статистика </a></mat-list-item>
-            <mat-list-item role="listitem">
-                <a class="menu-link" routerLink="profile/settings">Настройки </a>
-            </mat-list-item>
-        </mat-list>
+            </a>
+          <a mat-list-item role="listitem" class="lister" routerLink="/electro/view">
+            <mat-icon mat-list-icon>settings</mat-icon>
+            <h4 mat-line>Энергообъекты</h4>
+          </a>
+          <a mat-list-item role="listitem" class="lister" routerLink="/electro/customer/view">
+            <mat-icon mat-list-icon>work</mat-icon>
+            <h4 mat-line>Потребители</h4>
+
+          </a>
+          <a mat-list-item role="listitem" class="lister" routerLink="/electro/workload/view">
+            <mat-icon mat-list-icon>offline_bolt</mat-icon>
+            <h4 mat-line>Замеры нагрузок</h4>
+
+          </a>
+          <a mat-list-item role="listitem" class="lister"  routerLink="constructor">
+            <mat-icon mat-list-icon>dashboard</mat-icon>
+            <h4 mat-line>Конструктор запросов</h4>
+
+          </a>
+        </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content>
         <div class="main-content">

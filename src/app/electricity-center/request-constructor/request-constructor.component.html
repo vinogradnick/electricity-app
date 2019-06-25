@@ -8,85 +8,98 @@
     <mat-card class="request-tables-element">
       <label id="example-radio-group-label">Выбирете необходимую таблицу</label>
 
-      <mat-radio-group aria-label="Select an option" class="example-radio-group">
-
-        <mat-checkbox *ngFor="let table of tableList" [value]="table.isSelected"  class="example-radio-button" (click)="selectTable(table);">{{table.DisplayName}}</mat-checkbox>
-        
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+        [(ngModel)]="selectedTable">
+        <mat-radio-button class="example-radio-button" *ngFor="let season of tableList" [value]="season">
+          {{season.display_name}}
+        </mat-radio-button>
       </mat-radio-group>
     </mat-card>
-    <mat-tab-group class="tab-tables" >
-      <mat-tab [label]="table.DisplayName" *ngFor="let table of selectedTables">
+    <mat-tab-group class="tab-tables">
+      <mat-tab *ngIf="selectedTable!=null" [label]="selectedTable.display_name">
         <mat-card class="request-tables-table">
 
           <mat-card class="checkbox-attrs">
             <p>Атрибуты для просмотра</p>
-            <mat-list >
-              <mat-list-item *ngFor="let attr of table.Labels">
-                <mat-checkbox name="attr.Name" [(value)]="attr.Select">{{attr.Name}}</mat-checkbox>
+            <mat-list>
+              <mat-list-item *ngFor="let attr of selectedTable.labels">
+                <mat-checkbox name="attr.Name" [(ngModel)]="attr.select">{{attr.disp}}</mat-checkbox>
               </mat-list-item>
               <mat-divider></mat-divider>
-              
-             
+
+
             </mat-list>
 
 
           </mat-card>
           <div class="mat-elevation-z8 table-ful">
             <p>Тонкая настройка</p>
-            <table mat-table [dataSource]="table.Boxes" class=" table-ful">
+            <table mat-table [dataSource]="selectedTable.boxes" class=" table-ful">
 
               <!-- Checkbox Column -->
-              <ng-container matColumnDef="Selection">
+              <ng-container matColumnDef="selection">
                 <th mat-header-cell *matHeaderCellDef>
-                  <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                  </mat-checkbox>
+                  Выбор столбцов
                 </th>
                 <td mat-cell *matCellDef="let row">
-                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                  <mat-checkbox [(ngModel)]="row.selection">
                   </mat-checkbox>
                 </td>
               </ng-container>
 
               <!-- Position Column -->
-              <ng-container matColumnDef="Id">
+              <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> № </th>
-                <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
               </ng-container>
 
               <!-- Name Column -->
-              <ng-container matColumnDef="Name">
+              <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Наименование атрибута </th>
-                <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.disp}} </td>
               </ng-container>
 
               <!-- Weight Column -->
-              <ng-container matColumnDef="Operator">
+              <ng-container matColumnDef="operator">
                 <th mat-header-cell *matHeaderCellDef> Оператор </th>
                 <td mat-cell *matCellDef="let element">
 
+                  <div *ngIf="element.type==='number'">
+                    <select required [(ngModel)]="element.operator">
+                        <option>Пусто</option>
 
-                  <select required [(value)]="element.Operator">
-                    <option value="volvo">'>='</option>
-                    <option value="saab">'>'</option>
-                    <option value="mercedes">'<'</option> <option value="audi">'<='</option> <option value="audi">'!='
-                    </option>
-                    <option value="audi">'='</option>
+                      <option value=">=">'>='</option>
+                      <option value=">">'>'</option>
+                      <option value="<">'<'</option> 
+                      <option value="<=">'<='</option> 
+                      <option value="!=">'!='
+                      </option>
+                      <option value="=">'='</option>
 
-                  </select>
+                    </select>
+                  </div>
+                  <div *ngIf="element.type==='text'">
+                    <select required [(ngModel)]="element.operator">
+                        <option>Пусто</option>
+                      <option value="!=">'!='</option>
+                      
+                      <option value="=">'='</option>
+
+                    </select>
+                  </div>
+
                 </td>
               </ng-container>
 
               <!-- Symbol Column -->
-              <ng-container matColumnDef="Value">
+              <ng-container matColumnDef="value">
                 <th mat-header-cell *matHeaderCellDef> Значение </th>
                 <td mat-cell *matCellDef="let element">
 
                   <mat-form-field class="example-form-field">
-                    <input matInput type="text" placeholder="Значение поля">
-                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <input matInput [type]='element.type' placeholder="Значение поля" [(ngModel)]="element.value">
+                    <button mat-button *ngIf="element.value" matSuffix mat-icon-button aria-label="Clear"
+                      (click)="element.value=''">
                       <mat-icon>close</mat-icon>
                     </button>
                   </mat-form-field>
@@ -101,13 +114,35 @@
 
         </mat-card>
       </mat-tab>
-      
+
     </mat-tab-group>
-    
+
 
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>Выполнить запрос</button>
+    <button mat-button color="primary" (click)="postData()">Выполнить запрос</button>
     <button mat-button>Отмена</button>
   </mat-card-actions>
+</mat-card>
+<br>
+<mat-card class="request-constructor">
+  <mat-card-header class="exportable-header">
+
+    <mat-card-title class="header">Результат запроса</mat-card-title>
+    <button mat-raised-button (click)="exportToExcel()">Экспортировать в Excel</button>
+    <br>
+    <br>
+  </mat-card-header>
+  <mat-card-content class="request-table-selector">
+    <table mat-table [dataSource]="result" class="mat-elevation-z8">
+      <ng-container [matColumnDef]="column" *ngFor="let column of displayed">
+        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayed"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayed;"></tr>
+    </table>
+
+  </mat-card-content>
 </mat-card>

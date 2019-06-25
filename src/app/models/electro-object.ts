@@ -1,7 +1,8 @@
 import { Counter } from './counter';
+import { IFider } from './fider';
 
 export interface ElectroObject {
-    id:number,
+    id?:number,
     name:string,
     voltage:number,
     power:number,
@@ -10,4 +11,15 @@ export interface ElectroObject {
 }
 export interface IElectroReview extends ElectroObject{
     type:string;
+}
+export class ElectroReview implements ElectroObject{
+    id?: number;    
+    name: string;
+    voltage: number;
+    power: number;
+    geocode: string;
+    constructor(){
+        
+    }
+   
 }

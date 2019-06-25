@@ -9,7 +9,6 @@ import { WorkerComponent } from './worker/worker.component';
 import { HttpClient, HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ElectricityCenterModule } from './electricity-center/electricity-center.module';
 import { WorkerModule } from './worker/worker.module';
-import { AdminModule } from './admin/admin.module';
 import { ElectricityCenterComponent } from './electricity-center/electricity-center.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpConfigInterceptor} from './httpconfig.interceptor';
@@ -54,6 +53,8 @@ import {
 import { MatRadioModule } from '@angular/material/radio';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
+import {DatePipe} from '@angular/common';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -66,6 +67,7 @@ export function tokenGetter() {
     LoginComponent,
     WorkerComponent,
     ElectricityCenterComponent,
+    PageNotFoundComponent
 
   ],
   imports: [
@@ -74,7 +76,6 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     ElectricityCenterModule,
     WorkerModule,
-    AdminModule,
     HttpClientModule,
     MatAutocompleteModule,
     MatBadgeModule,
@@ -116,8 +117,8 @@ export function tokenGetter() {
         whitelistedDomains: ['localhost:4200']
       }
     }),
-    AdminModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+
 
 
   ],
@@ -160,7 +161,8 @@ export function tokenGetter() {
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true },
+    DatePipe
 
   ],
   bootstrap: [AppComponent]

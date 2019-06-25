@@ -9,9 +9,7 @@
     width: 400px;
 
 }
-.auth-card-header{
-    text-align: center;
-}
+
 .logo-image{
     width: 128px;
     align-content: center;
@@ -25,3 +23,7 @@
     display: flex;
     justify-content: space-between;
 }
+.mat-card-header {
+    justify-content: center;
+}
+

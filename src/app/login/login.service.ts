@@ -8,15 +8,6 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  loginUser(userData: IUser) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-      })
-    };
-    const stringify=JSON.stringify(userData);
-    this.http.post<IUser>(this.host+'auth', stringify,httpOptions);
-    
-  }
+  
   
 }

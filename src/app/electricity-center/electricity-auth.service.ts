@@ -10,7 +10,8 @@ import {Host} from '../config';
 export class ElectricityAuthService {
   isAuth: boolean;
   host: string = Host+'auth';
-  
+  public userName:string;
+  public role:string;
   constructor(
     private http: HttpClient,
     public jwtHelper: JwtHelperService,
@@ -25,7 +26,7 @@ export class ElectricityAuthService {
     this.http.post(this.host, json)
       .subscribe((resp: any) => {
         this.router.navigate(['/electro/main']);
-        localStorage.setItem('auth_token', resp.token);
+        localStorage.setItem('auth_token', resp.access_token);
 
       });
   }

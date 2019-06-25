@@ -4,30 +4,16 @@
 
     <mat-card-title>Создание Фидера</mat-card-title>
   </mat-card-header>
-  <form novalidate>
+  <form novalidate #form='ngForm'>
     <mat-card-content class="create-electro-content">
-
-
       <mat-list>
-
-        <mat-list-item>
-          <mat-icon mat-list-icon>label</mat-icon>
-          <h4 mat-line>Номер энергообъекта</h4>
-          <p>
-            <mat-form-field appearance="standard">
-              <mat-label>Номер энергообъекта</mat-label>
-              <input matInput placeholder="Номер энергообъекта" [(ngModel)]="fider.Id" name="Id" type="number">
-              <mat-icon matSuffix>number</mat-icon>
-            </mat-form-field>
-          </p>
-        </mat-list-item>
         <mat-list-item>
           <mat-icon mat-list-icon>note</mat-icon>
           <h4 mat-line>Наименование энергообъекта</h4>
           <p class="form-element">
             <mat-form-field appearance="standard">
               <mat-label>Наименование энергообъекта</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="fider.Name" name="Name" type="text">
+              <input matInput placeholder="Placeholder" [(ngModel)]="fider.name" name="Name" type="text" required>
             </mat-form-field>
           </p>
         </mat-list-item>
@@ -37,7 +23,7 @@
           <p>
             <mat-form-field appearance="standard">
               <mat-label>Мощность</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="fider.Power" name="Power" type="number">
+              <input matInput placeholder="Placeholder" [(ngModel)]="fider.power" name="Power" type="number" min="1" required>
             </mat-form-field>
           </p>
         </mat-list-item>
@@ -47,7 +33,8 @@
           <p>
             <mat-form-field appearance="standard">
               <mat-label>Напряжение</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="fider.Voltage" name="Voltage" type="number">
+              <input matInput placeholder="Placeholder" [(ngModel)]="fider.voltage" name="Voltage" type="number" min="1"
+                     required>
 
             </mat-form-field>
           </p>
@@ -58,18 +45,18 @@
           <p>
             <mat-form-field appearance="standard">
               <mat-label>Геопозиция</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="fider.Geocode" name="Geocode" type="text">
+              <input matInput placeholder="Placeholder" [(ngModel)]="fider.geocode" name="Geocode" type="text" required>
 
             </mat-form-field>
           </p>
         </mat-list-item>
 
         <br>
-        
+
       </mat-list>
       <div class="row-form-buttons">
-        <button mat-raised-button (click)="onSubmit()">Добавить энергообъект</button>
-        <button mat-raised-button color="accent">Отменить</button>
+        <button mat-raised-button [disabled]="form.invalid" (click)="onSubmit()">Добавить энергообъект</button>
+        <button mat-raised-button color="accent" (click)="back()">Отменить</button>
 
       </div>
     </mat-card-content>

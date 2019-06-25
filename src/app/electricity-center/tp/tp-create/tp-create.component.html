@@ -4,30 +4,20 @@
   
       <mat-card-title>Создание Трансформаторной подстанции</mat-card-title>
     </mat-card-header>
-    <form novalidate>
+    <form novalidate #form='ngForm' (ngSubmit)="onSubmit()">
       <mat-card-content class="create-electro-content">
   
   
         <mat-list>
   
-          <mat-list-item>
-            <mat-icon mat-list-icon>label</mat-icon>
-            <h4 mat-line>Номер энергообъекта</h4>
-            <p>
-              <mat-form-field appearance="standard">
-                <mat-label>Номер энергообъекта</mat-label>
-                <input matInput placeholder="Номер энергообъекта" [(ngModel)]="tp.Id" name="Id" type="number">
-                <mat-icon matSuffix>number</mat-icon>
-              </mat-form-field>
-            </p>
-          </mat-list-item>
+
           <mat-list-item>
             <mat-icon mat-list-icon>note</mat-icon>
             <h4 mat-line>Наименование энергообъекта</h4>
             <p class="form-element">
               <mat-form-field appearance="standard">
                 <mat-label>Наименование энергообъекта</mat-label>
-                <input matInput placeholder="Placeholder" [(ngModel)]="tp.Name" name="Name" type="text">
+                <input matInput placeholder="Placeholder" [(ngModel)]="tp.name" name="Name" type="text"  required>
               </mat-form-field>
             </p>
           </mat-list-item>
@@ -37,7 +27,7 @@
             <p>
               <mat-form-field appearance="standard">
                 <mat-label>Мощность</mat-label>
-                <input matInput placeholder="Placeholder" [(ngModel)]="tp.Power" name="Power" type="number">
+                <input matInput placeholder="Placeholder" [(ngModel)]="tp.power" name="Power" type="number" min="0" required>
               </mat-form-field>
             </p>
           </mat-list-item>
@@ -47,7 +37,7 @@
             <p>
               <mat-form-field appearance="standard">
                 <mat-label>Напряжение</mat-label>
-                <input matInput placeholder="Placeholder" [(ngModel)]="tp.Voltage" name="Voltage" type="number">
+                <input matInput placeholder="Placeholder" [(ngModel)]="tp.voltage" name="Voltage" type="number" min="0" required>
   
               </mat-form-field>
             </p>
@@ -58,12 +48,14 @@
             <p>
               <mat-form-field appearance="standard">
                 <mat-label>Геопозиция</mat-label>
-                <input matInput placeholder="Placeholder" [(ngModel)]="tp.Geocode" name="Geocode" type="text">
+                <input matInput placeholder="Placeholder" [(ngModel)]="tp.geocode" name="Geocode" type="text" required>
   
               </mat-form-field>
             </p>
           </mat-list-item>
-  
+
+
+
           <br>
           <mat-divider></mat-divider>
           <h3 mat-subheader>Трансформатор</h3>
@@ -73,7 +65,7 @@
             <p>
               <mat-form-field>
                 <mat-label>Наименование Трансформатора</mat-label>
-                <input matInput placeholder="Placeholder" [(ngModel)]="tp.Transformer.Name" name="TransformerId" type="text">
+                <input matInput placeholder="Placeholder" [(ngModel)]="tp.transformer.name" name="TransformerId" type="text">
   
               </mat-form-field>
             </p>
@@ -82,17 +74,34 @@
             <mat-icon mat-list-icon="">label_important</mat-icon>
             <h4 mat-line="">Тип Трансформатора</h4>
             <p>
-  
-              <mat-form-field>
-                <mat-label>Тип счетчика</mat-label>
-                <mat-select [(ngModel)]="tp.Transformer.Type" [ngModelOptions]="{standalone:true}">
-                  <mat-option [value]="1">
-                    1с-4
+
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Тип Трансформатора" aria-label="Number" matInput [(ngModel)]="tp.transformer.type.name" [matAutocomplete]="auto" [ngModelOptions]="{standalone: true}">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of transType" [value]="transType">
+                    {{option}}
                   </mat-option>
-                </mat-select>
+                </mat-autocomplete>
               </mat-form-field>
-  
-  
+
+
+            </p>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon mat-list-icon="">label_important</mat-icon>
+            <h4 mat-line="">Модель Трансформатора</h4>
+            <p>
+
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Модель Трансформатора" aria-label="Number" matInput [(ngModel)]="tp.transformer.model.name" [matAutocomplete]="auto" [ngModelOptions]="{standalone: true}">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let option of options" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+
             </p>
           </mat-list-item>
           <mat-list-item>
@@ -100,7 +109,7 @@
             <h4 mat-line="">Дата установки</h4>
             <p>
               <mat-form-field>
-                <input matInput [matDatepicker]="picker1" placeholder="Дата установки" [(ngModel)]="tp.Transformer.DateInstallation"
+                <input matInput [matDatepicker]="picker1" placeholder="Дата установки" [(ngModel)]="tp.transformer.dateInstallation"
                   name="DateInstall">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
@@ -114,7 +123,7 @@
             <p>
               <mat-form-field>
                 <input matInput [matDatepicker]="picker2" placeholder="Дата последней проверки"
-                  [(ngModel)]="tp.Transformer.DateCheck" name="DateLastCheck">
+                  [(ngModel)]="tp.transformer.dateCheck" name="DateLastCheck">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
@@ -122,8 +131,8 @@
           </mat-list-item>
         </mat-list>
         <div class="row-form-buttons">
-          <button mat-raised-button (click)="onSubmit()">Добавить энергообъект</button>
-          <button mat-raised-button color="accent">Отменить</button>
+          <button mat-raised-button [disabled]="form.invalid" type="submit">Добавить энергообъект</button>
+          <button mat-raised-button color="accent" (click)="back()">Отменить</button>
   
         </div>
       </mat-card-content>

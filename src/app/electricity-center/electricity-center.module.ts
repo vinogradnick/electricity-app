@@ -15,7 +15,6 @@ import { LineRemoveComponent } from './line/line-remove/line-remove.component';
 import { LineCreateComponent } from './line/line-create/line-create.component';
 import { CustomerCreateComponent } from './customer/customer-create/customer-create.component';
 import { CustomerChangeComponent } from './customer/customer-change/customer-change.component';
-import { CustomerRemoveComponent } from './customer/customer-remove/customer-remove.component';
 import { ElectricityCenterGuard } from './electricity-center.guard';
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { ElectricityReviewComponent } from './electricity-review/electricity-review.component';
@@ -80,23 +79,18 @@ import { CreateWorkloadComponent } from './workload/create-workload/create-workl
     FiderViewComponent,
     FiderCreateComponent,
     FiderChangeComponent,
-    FiderRemoveComponent,
     TpViewComponent,
     TpCreateComponent,
     TpChangeComponent,
-    TpRemoveComponent,
     SectionViewComponent,
     SectionCreateComponent,
     SectionChangeComponent,
-    SectionRemoveComponent,
     LineViewComponent,
     LineCreateComponent,
     LineChangeComponent,
-    LineRemoveComponent,
     CustomerComponent,
     CustomerCreateComponent,
     CustomerChangeComponent,
-    CustomerRemoveComponent,
     ElectricityReviewComponent,
     CustomerDetailComponent,
     WorkloadComponent,
@@ -152,12 +146,12 @@ import { CreateWorkloadComponent } from './workload/create-workload/create-workl
     MatTreeModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
 
   ],
   providers:[
     ElectricityCenterGuard,
-    
+
 
   ],
   exports:[

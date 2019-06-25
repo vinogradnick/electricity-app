@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderServiceService } from '../order-service.service';
+import { Order, IOrder } from 'src/app/models/order';
 
 @Component({
   selector: 'app-dispatcher-profile',
@@ -11,7 +12,7 @@ import { OrderServiceService } from '../order-service.service';
 
 export class DispatcherProfileComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'message', 'type'];
-  dataSource: IOrder[] = [];
+  dataSource: Order[] = [];
 
   constructor(
     private router: Router,

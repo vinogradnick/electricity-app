@@ -27,7 +27,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef> Тип заявки </th>
-            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.type.name}} </td>
           </ng-container>
         
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -43,8 +43,7 @@
       </mat-list-item>
       <mat-list-item role="listitem"> <a mat-raised-button color="primary" routerLink="/electro/workload/create">Записать Замеры Нагрузок</a>
       </mat-list-item>
-      <mat-list-item role="listitem"> <a mat-raised-button color="primary">Формирование отчета</a>
-      </mat-list-item>
+
     </mat-list>
   </mat-card>
 </mat-card>

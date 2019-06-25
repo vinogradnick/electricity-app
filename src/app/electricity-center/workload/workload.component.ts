@@ -4,14 +4,9 @@ import { Workload } from 'src/app/models/workload';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { MatTableDataSource } from '@angular/material';
 import { ElectricityService } from '../electricity.service';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
+import {WorkloadServiceService} from '../workload-service.service';
+import {ExcelService} from '../../excel.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-workload',
@@ -26,22 +21,28 @@ export interface PeriodicElement {
   styleUrls: ['./workload.component.scss']
 })
 export class WorkloadComponent implements OnInit {
-  displayedColumns: string[] = ['Id', 'Name', 'Date', 'TpName'];
-  dataSource;
-  phaseDisplay=["Id","LineName","Values"];
-  busbarSectionsDisplay = ["Id", "Name", "Value"];
+  displayedColumns: string[] = ['id', 'name', 'date', ];
+  dataSource:MatTableDataSource<Workload>;
+  phaseDisplay=["id","name","values"];
+  busbarSectionsDisplay = ["id", "name", "value"];
 
-  expandedElement: PeriodicElement | null;
+  expandedElement: Workload | null;
   constructor(
-    private ws:ElectricityService<Workload>
+    private ws:WorkloadServiceService,
+    private excel:ExcelService
   ) {
-    this.dataSource=new MatTableDataSource([{Id:0,Name:"fdsfds",Date:new Date(),Tp:{Id:0,Name:"Tp",Voltage:120,Power:20,Geocode:""},Phases:[{Id:0,LineName:"some",Values:[1,2,34]}]}])
+    this.ws.getModelArray().subscribe(el=>this.dataSource=new MatTableDataSource(el));
    }
 
   ngOnInit() {
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  exportReport(){
+    console.log('report');
+    this.excel.workloadReportExcel(this.dataSource.data);
+
   }
     
 }

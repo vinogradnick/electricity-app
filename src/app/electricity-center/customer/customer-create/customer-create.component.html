@@ -2,27 +2,17 @@
     <mat-card-header>
       <mat-card-title>Создание потребителя</mat-card-title>
     </mat-card-header>
-    <form novalidate >
+    <form #createForm="ngForm" novalidate >
     <mat-card-content class="create-electro-content">
       <mat-list>
-        <mat-list-item>
-          <mat-icon mat-list-icon>label</mat-icon>
-          <h4 mat-line>Идентификатор потребителя</h4>
-          <p>
-            <mat-form-field appearance="standard">
-              <mat-label>Идентификатор потребителя</mat-label>
-              <input matInput placeholder="Номер энергообъекта" [(ngModel)]="customer.id" name="Id" type="number">
-              <mat-icon matSuffix>number</mat-icon>
-            </mat-form-field>
-          </p>
-        </mat-list-item>
+       
         <mat-list-item>
           <mat-icon mat-list-icon>note</mat-icon>
           <h4 mat-line>Наименование потребителя</h4>
           <p class="form-element">
             <mat-form-field appearance="standard">
               <mat-label>Наименование потребителя</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="customer.name" name="Name" type="text">
+              <input matInput placeholder="Placeholder" [(ngModel)]="customer.name" name="Name" type="text" required>
             </mat-form-field>
           </p>
         </mat-list-item>
@@ -32,7 +22,7 @@
           <p>
             <mat-form-field appearance="standard">
               <mat-label>Наименование объекта</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="customer.objectName" name="ObjectName" type="text">
+              <input matInput placeholder="Placeholder" [(ngModel)]="customer.objectName" name="ObjectName" type="text" required>
             </mat-form-field>
           </p>
         </mat-list-item>
@@ -42,7 +32,7 @@
           <p>
             <mat-form-field appearance="standard">
               <mat-label>Адрес объекта</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="customer.objectAddress" name="Adress" type="text">
+              <input matInput placeholder="Placeholder" [(ngModel)]="customer.objectAddress" name="Adress" type="text" required>
             </mat-form-field>
           </p>
         </mat-list-item>
@@ -52,54 +42,26 @@
           <p>
             <mat-form-field appearance="standard">
               <mat-label>Место установки</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="customer.placeInstall" name="PlaceInstall" type="number">
+              <input matInput placeholder="Placeholder" [(ngModel)]="customer.placeInstall" name="PlaceInstall" type="text" required>
   
             </mat-form-field>
           </p>
         </mat-list-item>
-  
+        <mat-list-item>
+            <mat-icon mat-list-icon>explore</mat-icon>
+            <h4 mat-line>Статус подключения</h4>
+            <p>
+                <mat-checkbox name="status" class="example-margin" [(ngModel)]="customer.status" >Статус подключения</mat-checkbox>
+    
+            </p>
+          </mat-list-item>
         <br>
         <mat-divider></mat-divider>
         <h3 mat-subheader>Зависимости</h3>
-        <mat-list-item>
-          <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
-          <h4 mat-line>Номер фидера</h4>
-          <p>
-            <mat-form-field appearance="standard">
-              <mat-label>Номер фидера</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="customer.fiderNumber" name="FiderNumber" type="number">
+
   
-            </mat-form-field>
-          </p>
-        </mat-list-item>
-  
-        <br>
-        <mat-list-item>
-          <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
-          <h4 mat-line>Номер ТП</h4>
-          <p>
-            <mat-form-field appearance="standard">
-              <mat-label>Номер ТП</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="customer.tpNumber" name="TpNumber" type="number">
-  
-            </mat-form-field>
-          </p>
-        </mat-list-item>
-  
-        <br>
-        <mat-list-item>
-          <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
-          <h4 mat-line>Номер Линии</h4>
-          <p>
-            <mat-form-field appearance="standard">
-              <mat-label>Номер Линии</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="customer.lineNumber" name="LineNumber" type="number">
-  
-            </mat-form-field>
-          </p>
-        </mat-list-item>
-  
-        <br>
+
+        
         <mat-divider></mat-divider>
         <h3 mat-subheader>Счетчик</h3>
         <mat-list-item>
@@ -108,7 +70,7 @@
           <p>
             <mat-form-field appearance="outline">
               <mat-label>Наименование счетчика</mat-label>
-              <input matInput placeholder="Placeholder" [(ngModel)]="customer.counter.id" name="customer.CounterName" type="text">
+              <input matInput placeholder="Placeholder" [(ngModel)]="customer.counter.name" name="counterName" type="text" required>
   
             </mat-form-field>
           </p>
@@ -120,7 +82,7 @@
   
             <mat-form-field>
               <mat-label>Модель счетчика</mat-label>
-              <mat-select [(ngModel)]="customer.counter.brand.name" name="Brand">
+              <mat-select [(ngModel)]="customer.counter.brand.name" name="Brand" required>
                 <mat-option [value]="1">
                   1с-4
                 </mat-option>
@@ -135,7 +97,7 @@
           <h4 mat-line="">Дата установки</h4>
           <p>
             <mat-form-field>
-              <input matInput [matDatepicker]="picker1" placeholder="Дата установки" [(ngModel)]="customer.counter.dateInstall" name="DateInstall">
+              <input matInput [matDatepicker]="picker1" placeholder="Дата установки" [(ngModel)]="customer.counter.date" name="DateInstall" required>
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
@@ -147,7 +109,7 @@
           <h4 mat-line="">Дата последней проверки</h4>
           <p>
             <mat-form-field>
-              <input matInput [matDatepicker]="picker2" placeholder="Дата последней проверки" [(ngModel)]="customer.counter.dateLastCheck" name="DateLastCheck">
+              <input matInput [matDatepicker]="picker2" placeholder="Дата последней проверки" [(ngModel)]="customer.counter.dateLastCheck" name="DateLastCheck" required>
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
@@ -155,7 +117,7 @@
         </mat-list-item>
       </mat-list>
       <div class="row-form-buttons">
-        <button mat-raised-button  (click)="onSubmit()">Добавить потребителя</button>
+        <button mat-raised-button [disabled]="createForm.invalid" (click)="onSubmit()">Добавить потребителя</button>
         <button mat-raised-button color="accent" >Отменить</button>
   
       </div>

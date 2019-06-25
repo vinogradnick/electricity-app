@@ -8,28 +8,34 @@ import { ElectricityAuthService } from './electricity-auth.service';
 })
 export class ElectricityCenterGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(
-    public auth:ElectricityAuthService,
-    public router:Router
-    ){
+    public auth: ElectricityAuthService,
+    public router: Router
+  ) {
 
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log("Electro center guard activated");
-      if(this.auth.isLoggedIn){
-        return true;
-      }
-    else{
+    console.log("Electro center guard activated");
+    if (this.auth.isLoggedIn) {
+      return true;
+    }
+    else {
       this.router.navigate(['/']);
       return false;
     }
-      
+
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+    if (this.auth.isLoggedIn) {
+      return true;
+    }
+    else {
+      this.router.navigate(['/']);
+      return false;
+    }
   }
   canLoad(
     route: Route,

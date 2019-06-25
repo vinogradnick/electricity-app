@@ -1,3 +1,60 @@
-<p>
-  change-order works!
-</p>
+<mat-card class="electro-orders">
+  <h2 class="electro-orders-text">Изменение заявки</h2>
+  <form #createForm="ngForm" novalidate>
+    <mat-list>
+      <h3 mat-subheader>Данные заявки</h3>
+      <mat-list-item>
+        <mat-icon mat-list-icon>label</mat-icon>
+        <h4 mat-line>Наименование заявки</h4>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Наименование заявки"  name="name" [(ngModel)]="order.name" required >
+        </mat-form-field>
+
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>label</mat-icon>
+        <h4 mat-line>Сообщение заявки</h4>
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Сообщение заявки"  name="message" [(ngModel)]="order.message"  required></textarea>
+        </mat-form-field>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>label</mat-icon>
+        <h4 mat-line>Тип заявки</h4>
+        <mat-form-field>
+          <mat-label>Тип заявки</mat-label>
+          <mat-select [(ngModel)]="order.type.name" required name="type">
+            <mat-option>None</mat-option>
+            <mat-option value="Обычная">Обычная</mat-option>
+            <mat-option value="Плановая">Плановая</mat-option>
+            <mat-option value="Аварийная">Аварийная</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Информация по объекту заявки</h3>
+
+      <mat-list-item>
+        <mat-icon mat-list-icon>label</mat-icon>
+        <h4 mat-line> Тип объекта </h4>
+        <mat-form-field>
+          <mat-label>Выберите тип объекта</mat-label>
+          <mat-select [(ngModel)]="order.electroObject.type" required name="objectType">
+            <mat-option>Пусто</mat-option>
+            <mat-option value="ТП">ТП</mat-option>
+            <mat-option value="Секция">Секция</mat-option>
+            <mat-option value="Линия">Линия</mat-option>
+            <mat-option value="Фидер">Фидер</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </mat-list-item>
+      <div class="row-form-buttons">
+        <button mat-raised-button [disabled]="createForm.invalid" (click)="onSubmit()">Изменить заявку</button>
+        <button mat-raised-button (click)="back()" color="accent">Отменить</button>
+
+      </div>
+    </mat-list>
+  </form>
+
+</mat-card>

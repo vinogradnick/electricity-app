@@ -32,28 +32,23 @@
           <h4 mat-line>Место установки</h4>
           <h3>{{customer.placeInstall}}</h3>
         </mat-list-item>
-  
+        <mat-list-item>
+            <mat-icon mat-list-icon>explore</mat-icon>
+            <h4 mat-line>Статус подключения</h4>
+            <p>
+                <mat-checkbox name="status" class="example-margin" [(ngModel)]="customer.status" [disabled]="true">Статус подключения</mat-checkbox>
+    
+            </p>
+          </mat-list-item>
         <br>
         <mat-divider></mat-divider>
         <h3 mat-subheader>Зависимости</h3>
-        <mat-list-item>
-          <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
-          <h4 mat-line>Номер фидера</h4>
-          <h3>{{customer.fiderNumber}}</h3>
-        </mat-list-item>
-  
+
         <br>
-        <mat-list-item>
-          <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
-          <h4 mat-line>Номер ТП</h4>
-          <h3>{{customer.tpNumber}}</h3>
-        </mat-list-item>
-  
-        <br>
-        <mat-list-item>
+        <mat-list-item *ngIf="customer.lineId">
           <mat-icon mat-list-icon>panorama_fish_eye</mat-icon>
           <h4 mat-line>Номер Линии</h4>
-          <h3>{{customer.lineNumber}}</h3>
+          <h3>{{customer.lineId}}</h3>
         </mat-list-item>
   
         <br>
@@ -84,7 +79,9 @@
       </mat-list>
       <div class="row-form-buttons">
         <button  mat-raised-button  (click)="changeCustomer()">Изменить потребителя</button>
-        <button mat-raised-button color="accent" >Отменить</button>
+        <button  mat-raised-button  (click)="removeCustomer()">Удалить потребителя</button>
+
+        <button mat-raised-button color="accent" (click)="back()" >Отменить</button>
   
       </div>
   

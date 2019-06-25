@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { MessageService } from '../message.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Host } from '../config';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,16 @@ export abstract class ElectricityService<T>   {
   public type: string;
   constructor(
     private http: HttpClient,
-    private mesService: MessageService, type: string
+    private mesService: MessageService,
+    type: string,
+
   ) {
     this.type = type;
 
   }
 
   public getModel(index: number): Observable<T> {
+    console.log('is this');
     return this.http.get<T>(this.host + this.type + '/' + index);
 
   }
@@ -29,21 +33,27 @@ export abstract class ElectricityService<T>   {
     return this.http.get<T[]>(str);
   }
   public create(model: T): void {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    };
-    const jsq = JSON.stringify(model);
-    console.log(this.host + this.type);
-    this.http.post(this.host + this.type, jsq, httpOptions).subscribe(el => console.log(el), err => console.log(err));
+    let json = JSON.stringify(model);
+    console.log(json);
+    this.http.post(this.host + this.type, json).subscribe(el =>{
+      this.mesService.notifyUser("Объект успешно добавлен");
+
+    }, err => this.mesService.errorMessage('Неудалось создать объект'));
   }
   public update(index: number, model: T): void {
-    const jsq = JSON.stringify(model);
-    this.http.put<T>(this.host + this.type + "change/" + index, jsq);
+    let json = JSON.stringify(model);
+    console.log(json);
+    // tslint:disable-next-line:max-line-length
+    this.http.put<T>(this.host + this.type + '/' + index, json).subscribe(el =>{
+      this.mesService.notifyUser("Объект был успешно изменен");
+
+    }, err => this.mesService.errorMessage('Неудалось обновить объект'));
   }
   public remove(index: number, model: T): void {
-    const jsq = JSON.stringify(model);
-    this.http.delete<T>(this.host + this.type + "remove/" + index);
+
+    this.http.delete<T>(this.host + this.type + '/' + index).subscribe(el=>{
+      this.mesService.notifyUser("Объект успешно удален");
+
+    });
   }
 }

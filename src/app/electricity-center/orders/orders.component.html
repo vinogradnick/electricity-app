@@ -15,7 +15,7 @@
     <mat-list-item>
       <mat-icon mat-list-icon>label</mat-icon>
       <h4 mat-line>Тип заявки</h4>
-      <h3> {{order.type}} </h3>
+      <h3> {{order.type.name}} </h3>
     </mat-list-item>
 
     <mat-list-item>
@@ -26,22 +26,23 @@
     <mat-list-item>
       <mat-icon mat-list-icon>label</mat-icon>
       <h4 mat-line>Дата закрытия заявки</h4>
-      <h3> {{order.dataClose}} </h3>
+      <h3> {{order.dateClose}} </h3>
     </mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
   <mat-list *ngIf="order.electroObject!=null">
     <h3 mat-subheader>Информация по объекту заявки</h3>
-    <mat-list-item >
-      <mat-icon mat-list-icon>label</mat-icon>
-      <h4 mat-line>Номер объекта </h4>
-      <h3> {{order.electroObject.id}} </h3>
-    </mat-list-item>
     <mat-list-item>
       <mat-icon mat-list-icon>label</mat-icon>
       <h4 mat-line> Тип объекта </h4>
       <h3> {{order.electroObject.type}} </h3>
     </mat-list-item>
   </mat-list>
+  <div class="row-form-buttons">
+    <button mat-raised-button (click)="onSubmit()">Изменить заявку</button>
+    <button mat-raised-button (click)="removeOrder()">Удалить заявку</button>
 
+    <button mat-raised-button color="accent" (click)="back()">Отменить</button>
+
+  </div>
 </mat-card>

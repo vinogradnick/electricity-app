@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { OrderServiceService } from '../../order-service.service';
+import {Component, OnInit} from '@angular/core';
+import {OrderServiceService} from '../../order-service.service';
+import {Order} from 'src/app/models/order';
+import {Router} from '@angular/router';
+import {DELAY} from '../../../config';
 
 @Component({
   selector: 'app-create-order',
@@ -7,14 +10,33 @@ import { OrderServiceService } from '../../order-service.service';
   styleUrls: ['./create-order.component.scss']
 })
 export class CreateOrderComponent implements OnInit {
-  order: IOrder = { id: 0, name: 'FD', message: "Loream", type: "def", dateClose: new Date(), dateStart: new Date(), status: "false", electroObject: { id: 0, type: "fider" } }
-  constructor(private os: OrderServiceService) { }
+  order: Order = {
+    name: '',
+    message: '',
+    type: {name: ''},
+    dateClose: new Date(),
+    dateStart: new Date(),
+    status: 'false',
+    electroObject: {type: ''}
+  };
+
+  constructor(private os: OrderServiceService,
+              private router: Router) {
+  }
 
   ngOnInit() {
   }
+
   onSubmit() {
-    console.log("ok");
+    console.log('ok');
     this.os.create(this.order);
+    this.back();
+
   }
 
+  back() {
+    setTimeout(()=>{
+      this.router.navigate(['/electro/main']);
+    },DELAY);
+  }
 }

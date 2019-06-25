@@ -1,0 +1,9 @@
+.flex-input{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 200px;
+  .flex-input-box{
+    padding: 10px;
+  }
+}

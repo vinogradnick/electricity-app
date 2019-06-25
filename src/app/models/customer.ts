@@ -3,19 +3,25 @@ import { Fider } from './fider';
 import { Tp } from './tp';
 import { Line } from './line';
 
-export interface Customer {
-    id:number,
-    
+export interface ICustomer {
+    id?:number,
     name:string,
     objectName:string,
     objectAddress:string,
     placeInstall:string,
-    fiderNumber:number,
-    lineNumber:number,
-    tpNumber:number,
+  lineId?: number;
     status:boolean
     counter?:Counter
-    fider?:Fider,
-    tp?:Tp,
-    line?:Line
+    }
+export class Customer implements ICustomer{
+    id?: number;    name: string;
+    objectName: string;
+    objectAddress: string;
+    placeInstall: string;
+    lineId?: number;
+    status: boolean;
+    counter?: Counter;
+
+
+
 }

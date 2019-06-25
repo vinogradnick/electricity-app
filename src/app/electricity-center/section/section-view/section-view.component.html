@@ -1,3 +1,119 @@
-<p>
-  section-view works!
-</p>
+<mat-card class="electricity-create">
+  <mat-card-header>
+
+
+    <mat-card-title>Просмотр Секции</mat-card-title>
+  </mat-card-header>
+  <form novalidate>
+    <mat-card-content class="create-electro-content">
+
+
+      <mat-list>
+        <h3 mat-subheader>Данные по Линии</h3>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Наименование Линии</h4>
+          <h3> {{section.name}} </h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Мощность</h4>
+          <h3> {{section.power}} </h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Напряжение</h4>
+          <h3> {{section.voltage}} </h3>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Геопозиция</h4>
+          <h3> {{section.geocode}} </h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Номер ТП</h4>
+          <h3> {{section.tpId}} </h3>
+        </mat-list-item>
+        <h3 mat-subheader>Счетчик</h3>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Наименование счетчика</h4>
+          <h3>{{section.counter.name}}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon="">label_important</mat-icon>
+          <h4 mat-line="">Модель счетчика</h4>
+          <h3>{{section.counter.brand.name}}</h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon="">event</mat-icon>
+          <h4 mat-line="">Дата установки</h4>
+          <h3>{{section.counter.date}}</h3>
+
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon="">date_range</mat-icon>
+          <h4 mat-line="">Дата последней проверки</h4>
+          <h3>{{section.counter.dateLastCheck}}</h3>
+
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+      <br>
+
+      <div class="row-form-buttons">
+        <button mat-raised-button (click)="onSubmit()">Изменить энергообъект</button>
+        <button mat-raised-button (click)="remove()">Удалить энергообъект</button>
+
+        <button mat-raised-button (click)="back()" color="accent">Отменить</button>
+
+      </div>
+      <br>
+      <br>
+      <h4>Список подключенных Линий</h4>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Идентификатор</th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Наименование</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="power">
+          <th mat-header-cell *matHeaderCellDef> Мощность</th>
+          <td mat-cell *matCellDef="let element"> {{element.power}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="voltage">
+          <th mat-header-cell *matHeaderCellDef> Напряжение</th>
+          <td mat-cell *matCellDef="let element"> {{element.voltage}} </td>
+        </ng-container>
+        <ng-container matColumnDef="geocode">
+          <th mat-header-cell *matHeaderCellDef> Геопозиция</th>
+          <td mat-cell *matCellDef="let element"> {{element.geocode}} </td>
+        </ng-container>
+        <ng-container matColumnDef="sectionId">
+          <th mat-header-cell *matHeaderCellDef> Геопозиция</th>
+          <td mat-cell *matCellDef="let element"> {{element.sectionId}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectLine(row)"></tr>
+      </table>
+
+    </mat-card-content>
+  </form>
+</mat-card>

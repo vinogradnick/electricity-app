@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ElectricityAuthService } from './electricity-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-electricity-center',
@@ -6,13 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./electricity-center.component.scss']
 })
 export class ElectricityCenterComponent implements OnInit {
-  isOpenedSidebar:boolean=false;
-  constructor() { }
+  isOpenedSidebar: boolean = false;
+  userName: string;
+  role: string;
+  constructor(private auth: ElectricityAuthService,private router:Router ) { }
 
   ngOnInit() {
   }
-  test(){
+  test() {
     console.log("i am works");
   }
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/']);
+    
+  }
+
 
 }

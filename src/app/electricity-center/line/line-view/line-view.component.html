@@ -1,3 +1,101 @@
-<p>
-  line-view works!
-</p>
+<mat-card class="electricity-create">
+  <mat-card-header>
+
+
+    <mat-card-title>Просмотр Линии</mat-card-title>
+  </mat-card-header>
+  <form novalidate>
+    <mat-card-content class="create-electro-content">
+
+
+      <mat-list>
+        <h3 mat-subheader>Данные по Линии</h3>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Наименование Линии</h4>
+          <h3> {{line.name}} </h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Мощность</h4>
+          <h3> {{line.power}} </h3>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Напряжение</h4>
+          <h3> {{line.voltage}} </h3>
+        </mat-list-item>
+    
+        <mat-list-item>
+          <mat-icon mat-list-icon>label</mat-icon>
+          <h4 mat-line>Геопозиция</h4>
+          <h3> {{line.geocode}} </h3>
+        </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>label</mat-icon>
+        <h4 mat-line>Номер секции</h4>
+        <h3> {{line.sectionId}} </h3>
+      </mat-list-item>
+
+      </mat-list>
+
+      <br>
+      <div class="row-form-buttons">
+        <button mat-raised-button (click)="onSubmit()">Изменить энергообъект</button>
+        <button mat-raised-button (click)="remove()">Удалить энергообъект</button>
+
+        <button mat-raised-button (click)="back()" color="accent">Отменить</button>
+
+      </div>
+      <br>
+      <mat-card>
+      <h4>Список подключенных Потребителей</h4>
+      <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Идентификатор </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Наименование </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="objectName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Наименование объекта </th>
+          <td mat-cell *matCellDef="let element"> {{element.objectName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="objectAddress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Адрес объекта </th>
+          <td mat-cell *matCellDef="let element"> {{element.objectAddress}} </td>
+        </ng-container>
+        <ng-container matColumnDef="placeInstall">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Место установки </th>
+          <td mat-cell *matCellDef="let element"> {{element.placeInstall}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lineId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Номер Линии </th>
+          <td mat-cell *matCellDef="let element"> {{element.lineId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Статус подключения </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="customer-select-row"
+            (click)="selectedCustomer(element)"
+        >
+          <!-- add ngModel for customer-->
+        </tr>
+
+      </table>
+      </mat-card>
+    </mat-card-content>
+
+  </form>
+</mat-card>
